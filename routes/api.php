@@ -19,13 +19,13 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-// Route::middleware('auth:api')->group(function () {
-// });
-Route::post('logout', [AuthController::class, 'logout']);
-Route::post('currentUser', [AuthController::class, 'currentUser']);
-Route::post('refresh', [AuthController::class, 'refreshToken']);
+Route::middleware('auth:api')->group(function () {
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('currentUser', [AuthController::class, 'currentUser']);
+    Route::post('refresh-token', [AuthController::class, 'refreshToken']);
+});
 
-// Route::middleware('guest:api')->group(function () {
-// });
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+Route::middleware('guest:api')->group(function () {
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('login', [AuthController::class, 'login']);
+});

@@ -19,7 +19,7 @@ class AuthController extends Controller
         $token = auth('api')->login($newUser);
 
         return response()->json([
-            'success' => true, 
+            'user' => $newUser, 
             'token' => $token,
             'message' => 'You have successfully created account']);
     }
@@ -60,4 +60,3 @@ class AuthController extends Controller
         ];
     }
 }
-
