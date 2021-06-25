@@ -49,7 +49,8 @@ class AuthController extends Controller
 
     public function currentUser()
     {
-        return auth('api')->user();
+        $user = auth('api')->user();
+        return User::with('galleries', 'images.comments', 'comments')->find($user->id);
     }
 
     public function refreshToken()

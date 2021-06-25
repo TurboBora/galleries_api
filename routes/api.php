@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,13 +21,17 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::middleware('auth:api')->group(function () {
+// Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('currentUser', [AuthController::class, 'currentUser']);
+    Route::post('current-user', [AuthController::class, 'currentUser']);
     Route::post('refresh-token', [AuthController::class, 'refreshToken']);
-});
+// });
 
-Route::middleware('guest:api')->group(function () {
+// Route::middleware('guest:api')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
-});
+// });
+
+Route::get('/galleries', [GalleryController::class, 'index']);
+Route::get('/my-galleries', [UserController::class, 'myGalleries']);
+// Route::get('/galleries/{id}', [GalleryController::class, 'show']);

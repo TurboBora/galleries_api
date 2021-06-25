@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateGalleryRequest;
-use App\Models\Gallery;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class GalleryController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function myGalleries()
     {
-        $results = Gallery::with('user', 'images', 'comments');
-        $galleries = $results->get();
-
-        return response()->json($galleries);
+        $user = auth('api')->user();
+        $userGalleries = $user->galleries;
+        return response()->json($userGalleries);
     }
 
     /**
@@ -38,35 +35,9 @@ class GalleryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateGalleryRequest $request)
+    public function store(Request $request)
     {
-        // $data = $request->validated();
-        // $userId = Auth::id();
-
-        // foreach ($data['URLS'] as ) {
-        //     # code...
-        // }
-        // Gallery::create([
-
-        // ]);
-
-
-
-
-        /**public function addImages($source, $id) {
-        return $this->images()->create([
-            'source' => $source,
-            'gallery_id' => $id
-        ]);
-    }
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         */
+        //
     }
 
     /**
@@ -77,7 +48,8 @@ class GalleryController extends Controller
      */
     public function show($id)
     {
-        //
+        // $user = User::with('galleries', 'galleries.images', 'comments')->findOrFail($id);
+        // return response()->json($user);
     }
 
     /**
